@@ -1,57 +1,53 @@
+/** Libraries */
 import React, { Component } from 'react';
-
+/** Components */
 import SeasonDisplay from '../components/season-display/season-display.component';
+import Spinner from '../components/spinner/spinner.component';
+import Warning from '../components/warning/warning.component';
+/** Styles */
 import './app.styles.css';
 
 class App extends Component {
   state = {
     latitude: null,
-    longitude: null,
     isLoading: false,
     errorMessage: null,
   };
 
   componentDidMount() {
-    console.log('Component did mount');
     this.setState({ isLoading: true });
     /** Get user's location */
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         const {
-          coords: { latitude, longitude },
+          coords: { latitude },
         } = position;
-        this.setState({ latitude, longitude, isLoading: false, errorMessage: null });
+        this.setState({ latitude, isLoading: false, errorMessage: null });
       },
       (error) => this.setState({ errorMessage: error.message, isLoading: false })
     );
   }
 
-  componentDidUpdate() {
-    console.log('Component did update');
-  }
-
-  render() {
-    const { latitude, longitude, isLoading, errorMessage } = this.state;
-
-    console.log('Rendered');
+  renderContent() {
+    const { latitude, isLoading, errorMessage } = this.state;
 
     if (isLoading) {
-      return <div>Loading your geo position</div>;
+      return (
+        <Spinner size="huge">
+          Waiting for getting your geo location (please, allow us to do it)...
+        </Spinner>
+      );
     }
 
     if (errorMessage) {
-      return <div>{errorMessage}</div>;
+      return <Warning>{errorMessage}</Warning>;
     }
 
-    return (
-      <>
-        <div>
-          <div>Latitude: {latitude}</div>
-          <div>Longitude: {longitude}</div>
-        </div>
-        <SeasonDisplay />
-      </>
-    );
+    return <SeasonDisplay lat={latitude} />;
+  }
+
+  render() {
+    return <div>{this.renderContent()}</div>;
   }
 }
 

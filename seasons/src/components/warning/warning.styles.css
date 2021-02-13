@@ -1,0 +1,7 @@
+.warning-message .segment {
+  height: 100vh;
+}
+
+.warning-message .segment .icon {
+  color: red;
+}
