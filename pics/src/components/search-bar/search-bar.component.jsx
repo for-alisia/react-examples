@@ -20,15 +20,17 @@ class SearchBar extends React.Component {
     return (
       <div className="ui segment">
         <form className="ui form" onSubmit={this.onFormSubmit}>
-          <div className="field">
-            <label htmlFor="search">Image search</label>
+          <div className="ui action input fluid">
             <input
               type="text"
-              placeholder="Print something here..."
+              placeholder="Images search..."
               id="search"
               value={term}
               onChange={(e) => this.setState({ term: e.target.value })}
             />
+            <button type="submit" className="ui button">
+              SEARCH
+            </button>
           </div>
         </form>
       </div>

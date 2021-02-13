@@ -1,0 +1,6 @@
+.image-list div {
+  overflow: hidden;
+}
+.image-list div img {
+  width: 100%;
+}
