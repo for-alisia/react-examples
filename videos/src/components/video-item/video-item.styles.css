@@ -1,0 +1,10 @@
+.video-item {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 2rem;
+}
+
+.video-item .image {
+  margin-right: 1rem;
+}

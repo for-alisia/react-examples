@@ -1,0 +1,11 @@
+body {
+  padding: 2rem;
+}
+
+.app-content {
+  display: flex;
+  /* justify-content: space-between; */
+  flex-direction: column;
+
+  margin-top: 3rem;
+}

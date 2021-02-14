@@ -4,6 +4,7 @@ import React from 'react';
 /** Components */
 import SearchBar from '../components/search-bar';
 import ImageList from '../components/image-list';
+import Header from '../components/header';
 
 /** Utils */
 import unsplash from '../api/unsplash';
@@ -11,7 +12,8 @@ import unsplash from '../api/unsplash';
 class App extends React.Component {
   state = {
     images: [],
-    term: '',
+    pages: 0,
+    currentPage: 0,
   };
 
   onSearchSubmit = async (term) => {
@@ -27,10 +29,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="ui container" style={{ marginTop: '20px' }}>
-        <SearchBar onSearchSubmit={this.onSearchSubmit} />
-        <ImageList images={this.state.images} />
-      </div>
+      <>
+        <div className="ui container" style={{ marginTop: '20px' }}>
+          <Header />
+          <SearchBar onSearchSubmit={this.onSearchSubmit} />
+          <ImageList images={this.state.images} />
+        </div>
+      </>
     );
   }
 }
