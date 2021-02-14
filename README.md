@@ -14,3 +14,7 @@ Image gallery, based on unsplash API. User can search for anything and then app 
 Class-based components, state managament via react state.
 
 ---
+
+## Video App (videos folder)
+
+Appication uses youtube API, user can search for anything and then see the related videos from youtube. User can pick any video and watch it. Class-based components, react state (state passed via props).

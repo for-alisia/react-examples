@@ -26,7 +26,7 @@ class App extends React.Component {
           q: term,
         },
       });
-      this.setState({ videos: res.data.items });
+      this.setState({ videos: res.data.items, selectedVideo: null });
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +46,14 @@ class App extends React.Component {
         <SearchBar onSearchSubmit={this.onSearchSubmit} />
         <div className="app-content">
           {selectedVideo ? <VideoDetail video={selectedVideo} /> : ''}
-          <VideoList videos={videos} onVideoSelected={this.onVideoSelected} />
+
+          {videos.length !== 0 ? (
+            <div className="app-video-list">
+              <VideoList videos={videos} onVideoSelected={this.onVideoSelected} />
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       </main>
     );
