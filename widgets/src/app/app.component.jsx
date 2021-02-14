@@ -12,7 +12,7 @@ import './app.styles.css';
 
 const App = () => {
   return (
-    <div>
+    <div className="ui container">
       <h1>Widgets</h1>
       <Accordion items={items} />
     </div>
