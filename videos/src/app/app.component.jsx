@@ -34,6 +34,7 @@ class App extends React.Component {
 
   onVideoSelected = (videoId) => {
     this.setState({
+      // @ts-ignore
       selectedVideo: this.state.videos.find((video) => video.id.videoId === videoId),
     });
   };
