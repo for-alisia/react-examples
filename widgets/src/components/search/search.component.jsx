@@ -1,3 +1,4 @@
+// @ts-nocheck
 /** Libraries */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -6,8 +7,17 @@ import axios from 'axios';
 import './search.styles.css';
 
 const Search = () => {
-  const [inputValue, setInputValue] = useState('javascript');
+  const [inputValue, setInputValue] = useState('programming');
+  const [debouncedTerm, setDebouncedTerm] = useState(inputValue);
   const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(inputValue);
+    }, 1000);
+
+    return () => clearTimeout(timerId);
+  }, [inputValue]);
 
   useEffect(() => {
     const search = async () => {
@@ -18,7 +28,7 @@ const Search = () => {
             list: 'search',
             origin: '*',
             format: 'json',
-            srsearch: inputValue,
+            srsearch: debouncedTerm,
           },
         });
         setResults(data.query.search);
@@ -26,11 +36,8 @@ const Search = () => {
         console.log(err);
       }
     };
-
-    if (inputValue) {
-      search();
-    }
-  }, [inputValue]);
+    search();
+  }, [debouncedTerm]);
 
   const onInputChanged = (e) => {
     setInputValue(e.target.value);
@@ -47,9 +54,14 @@ const Search = () => {
       <div className="ui celled list">
         {results.map((result) => (
           <div className="item" key={result.pageid}>
+            <div className="right floated content">
+              <a className="ui button" href={`https://en.wikipedia.org?curid=${result.pageid}`}>
+                Go
+              </a>
+            </div>
             <div className="content">
               <div className="header">{result.title}</div>
-              {result.snippet}
+              <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
             </div>
           </div>
         ))}
