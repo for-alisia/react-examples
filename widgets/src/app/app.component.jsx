@@ -1,7 +1,11 @@
 /** Libraries */
 import React, { useState } from 'react';
 
+/** Router */
+import Route from '../components/route/route.component';
+
 /** Components */
+import Header from '../components/header/header.component';
 import Accordion from '../components/accordion/accordion.component';
 import Search from '../components/search/search.component';
 import Dropdown from '../components/dropdown/dropdowm.component';
@@ -19,27 +23,24 @@ const App = () => {
   return (
     <div className="ui container">
       <h1>Widgets</h1>
-      <div className="ui segment">
-        <h3>Translator</h3>
-        <Translator />
-      </div>
-      <div className="ui segment">
-        <h3>Dropdown</h3>
+      <Header />
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+      <Route path="/list">
+        <Search />
+      </Route>
+      <Route path="/dropdown">
         <Dropdown
           options={dropdownOptions}
+          label="Select color"
           selected={selected}
           onSelectedChanged={setSelected}
-          label="Select a color"
         />
-      </div>
-      <div className="ui segment">
-        <h3>Accordion</h3>
-        <Accordion items={items} />
-      </div>
-      <div className="ui segment">
-        <h3>Wikipedia Search</h3>
-        <Search />
-      </div>
+      </Route>
+      <Route path="/translator">
+        <Translator />
+      </Route>
     </div>
   );
 };
