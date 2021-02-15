@@ -19,3 +19,18 @@ export const accItems = [
       'React.PureComponent is exactly the same as React.Component except that it handles the shouldComponentUpdate() method for you.',
   },
 ];
+
+export const dropdownOptions = [
+  {
+    label: 'Color Red',
+    value: 'red',
+  },
+  {
+    label: 'Color Green',
+    value: 'green',
+  },
+  {
+    label: 'Color Blue',
+    value: 'blue',
+  },
+];
