@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Accordion from '../components/accordion/accordion.component';
 import Search from '../components/search/search.component';
 import Dropdown from '../components/dropdown/dropdowm.component';
+import Translator from '../components/translator/translator.component';
 
 /** Data */
 import { accItems as items, dropdownOptions } from '../data';
@@ -18,6 +19,10 @@ const App = () => {
   return (
     <div className="ui container">
       <h1>Widgets</h1>
+      <div className="ui segment">
+        <h3>Translator</h3>
+        <Translator />
+      </div>
       <div className="ui segment">
         <h3>Dropdown</h3>
         <Dropdown options={dropdownOptions} selected={selected} onSelectedChanged={setSelected} />

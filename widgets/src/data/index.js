@@ -34,3 +34,18 @@ export const dropdownOptions = [
     value: 'blue',
   },
 ];
+
+export const languages = [
+  {
+    label: 'Russian',
+    value: 'ru',
+  },
+  {
+    label: 'Arabic',
+    value: 'ar',
+  },
+  {
+    label: 'Hindi',
+    value: 'hi',
+  },
+];
