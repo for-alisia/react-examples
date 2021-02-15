@@ -25,7 +25,12 @@ const App = () => {
       </div>
       <div className="ui segment">
         <h3>Dropdown</h3>
-        <Dropdown options={dropdownOptions} selected={selected} onSelectedChanged={setSelected} />
+        <Dropdown
+          options={dropdownOptions}
+          selected={selected}
+          onSelectedChanged={setSelected}
+          label="Select a color"
+        />
       </div>
       <div className="ui segment">
         <h3>Accordion</h3>
