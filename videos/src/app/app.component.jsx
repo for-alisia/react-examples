@@ -1,5 +1,6 @@
+// @ts-nocheck
 /** Libraries */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 /** Components */
 import SearchBar from '../components/search-bar';
@@ -13,52 +14,45 @@ import youtube from '../api/youtube';
 /** Styles */
 import './app.styles.css';
 
-class App extends React.Component {
-  state = {
-    videos: [],
-    selectedVideo: null,
-  };
+const App = () => {
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
-  onSearchSubmit = async (term) => {
+  const onSearchSubmit = async (term) => {
     try {
       const res = await youtube.get('/search', {
         params: {
           q: term,
         },
       });
-      this.setState({ videos: res.data.items, selectedVideo: null });
+      setVideos(res.data.items);
+      setSelectedVideo(null);
     } catch (err) {
       console.log(err);
     }
   };
 
-  onVideoSelected = (videoId) => {
-    this.setState({
-      // @ts-ignore
-      selectedVideo: this.state.videos.find((video) => video.id.videoId === videoId),
-    });
+  const onVideoSelected = (videoId) => {
+    setSelectedVideo(videos.find((video) => video.id.videoId === videoId));
   };
 
-  render() {
-    const { videos, selectedVideo } = this.state;
-    return (
-      <main className="ui container segment">
-        <Header />
-        <SearchBar onSearchSubmit={this.onSearchSubmit} />
-        <div className="app-content">
-          {selectedVideo ? <VideoDetail video={selectedVideo} /> : ''}
+  return (
+    <main className="ui container segment">
+      <Header />
+      <SearchBar onSearchSubmit={onSearchSubmit} />
+      <div className="app-content">
+        {selectedVideo ? <VideoDetail video={selectedVideo} /> : ''}
 
-          {videos.length !== 0 ? (
-            <div className="app-video-list">
-              <VideoList videos={videos} onVideoSelected={this.onVideoSelected} />
-            </div>
-          ) : (
-            ''
-          )}
-        </div>
-      </main>
-    );
-  }
-}
+        {videos.length !== 0 ? (
+          <div className="app-video-list">
+            <VideoList videos={videos} onVideoSelected={onVideoSelected} />
+          </div>
+        ) : (
+          ''
+        )}
+      </div>
+    </main>
+  );
+};
 
 export default App;
