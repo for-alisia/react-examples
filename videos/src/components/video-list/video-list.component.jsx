@@ -11,9 +11,9 @@ const VideoList = ({ videos, onVideoSelected }) => {
   console.log(videos);
   return (
     <ul className="videos-list">
-      {videos.map(({ id: { videoId }, snippet }) => (
-        <li key={videoId}>
-          <VideoItem video={snippet} onVideoSelected={onVideoSelected} videoId={videoId} />
+      {videos.map((video) => (
+        <li key={video.id.videoId}>
+          <VideoItem video={video} onVideoSelected={onVideoSelected} />
         </li>
       ))}
     </ul>

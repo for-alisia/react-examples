@@ -1,4 +1,3 @@
-// @ts-nocheck
 /** Libraries */
 import React, { useState, useEffect } from 'react';
 
@@ -8,44 +7,28 @@ import VideoDetail from '../components/video-detail';
 import VideoList from '../components/video-list';
 import Header from '../components/header';
 
-/** Utils */
-import youtube from '../api/youtube';
+/** Hooks */
+import useVideos from '../hooks/useVideos';
 
 /** Styles */
 import './app.styles.css';
 
 const App = () => {
-  const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videos, search] = useVideos('nature');
 
-  const onSearchSubmit = async (term) => {
-    try {
-      const res = await youtube.get('/search', {
-        params: {
-          q: term,
-        },
-      });
-      setVideos(res.data.items);
-      setSelectedVideo(null);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const onVideoSelected = (videoId) => {
-    setSelectedVideo(videos.find((video) => video.id.videoId === videoId));
-  };
+  useEffect(() => setSelectedVideo(videos[0]), [videos]);
 
   return (
     <main className="ui container segment">
       <Header />
-      <SearchBar onSearchSubmit={onSearchSubmit} />
+      <SearchBar onSearchSubmit={search} />
       <div className="app-content">
         {selectedVideo ? <VideoDetail video={selectedVideo} /> : ''}
 
         {videos.length !== 0 ? (
           <div className="app-video-list">
-            <VideoList videos={videos} onVideoSelected={onVideoSelected} />
+            <VideoList videos={videos} onVideoSelected={setSelectedVideo} />
           </div>
         ) : (
           ''
