@@ -29,3 +29,5 @@ Live version, deployed in Vercel: [Widgets Examples React App](https://widgets-d
 Note: you can't you translator in live version because of API-key settings (it accepts only requests from localhost:3000)
 
 ---
+
+## Songs App (songs folder)
