@@ -31,3 +31,7 @@ Note: you can't you translator in live version because of API-key settings (it a
 ---
 
 ## Songs App (songs folder)
+
+The main goal of this app is to use Redux inside as a state manager. Just Redux and React-Redux. Without additional libraries, as reselect and others. Basic example of using Redux. No API used.
+
+## Posts App (blog folder)
