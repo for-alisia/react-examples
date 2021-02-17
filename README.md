@@ -20,8 +20,12 @@ Class-based components, state managament via react state.
 Appication uses youtube API, user can search for anything and then see the related videos from youtube. User can pick any video and watch it. Function-based approach, custom hook for fetching data from youtube API, react state (state passed via props).
 Live version, deployed in Vercel: [Video Search React App](https://videos-orpin.vercel.app/)
 
+---
+
 ## Widgets App (widgets folder)
 
 This app is a set of 4 different widgets: classic accordion, dropdown, search from Wikipedia and translator (uses Google Translate API). All widgets are built from scratch without any libraries. Functional components. Contstructed navigation without (react-router), using 2 base components - Route and Link.
 Live version, deployed in Vercel: [Widgets Examples React App](https://widgets-devwva3r9.vercel.app/)
 Note: you can't you translator in live version because of API-key settings (it accepts only requests from localhost:3000)
+
+---
