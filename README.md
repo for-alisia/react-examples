@@ -37,3 +37,11 @@ The main goal of this app is to use Redux inside as a state manager. Just Redux 
 ---
 
 ## Posts App (blog folder)
+
+---
+
+## Reviews App (reviews folder)
+
+---
+
+## Slider App (slider folder)
