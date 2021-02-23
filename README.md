@@ -30,6 +30,26 @@ Note: you can't you translator in live version because of API-key settings (it a
 
 ---
 
+## Color Generator (color-generator folder)
+
+Simple color generator. User can type the color and app shows titnts and shadows for him with their hex-value and possibility to copy to clipboard.
+
+Live version, deployed in Vercel: [Color Generator React App](https://color-generator-eight.vercel.app/).
+
+## Infinity images scroll (infinity folder)
+
+Infinity image gallery. Unsplash API. Get featured photos from the API by default. User can search for the photos he wants. New photos are loaded when user reaches the end of the page.
+
+Live version, deployed in Vercel: [Infinite Image Gallery React App](https://infinity-mauve.vercel.app/). Request's amount is restricted to 50 in an hour by API.
+
+---
+
+## Cart App (cart folder)
+
+Simple example of useReducer() hook. Items are loaded from api, then user can change the quantity of the items, delete them and clear the cart.
+
+Live version, deployed in Vercel: [Cart Example React App](https://cart-tau.vercel.app/)
+
 ## Songs App (songs folder)
 
 The main goal of this app is to use Redux inside as a state manager. Just Redux and React-Redux. Without additional libraries, as reselect and others. Basic example of using Redux. No API used.
@@ -38,14 +58,20 @@ The main goal of this app is to use Redux inside as a state manager. Just Redux 
 
 ## Posts App (blog folder)
 
+Basic Redux App. Get posts from API, and then get users, who created this posts.
+
 ---
 
 ## Reviews App (reviews folder)
+
+Simple list of user's review.
 
 ---
 
 ## Slider App (slider folder)
 
----
+Simple, but very common slider, especially for reviews.
 
-## Infinity images scroll (infinity folder)
+Live version, deployed in Vercel: [Slider Example React App](https://slider-ochre.vercel.app/)
+
+---
