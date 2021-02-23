@@ -45,3 +45,7 @@ The main goal of this app is to use Redux inside as a state manager. Just Redux 
 ---
 
 ## Slider App (slider folder)
+
+---
+
+## Infinity images scroll (infinity folder)
