@@ -1,5 +1,6 @@
 /** Dependencies */
 import React from 'react';
+
 /** Context */
 import LanguageContext from '../contexts/language.context';
 import ColorContext from '../contexts/color.context';
