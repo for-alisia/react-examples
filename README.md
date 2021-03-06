@@ -75,3 +75,7 @@ Simple, but very common slider, especially for reviews.
 Live version, deployed in Vercel: [Slider Example React App](https://slider-ochre.vercel.app/)
 
 ---
+
+## Next base routing example (next-basic-ex folder)
+
+Example how to use routing and folder structure in NextJS to organize the project structure (dynamic routes and nested routes plus programmatic navigation). No UI. Just a skeleton.
