@@ -79,3 +79,9 @@ Live version, deployed in Vercel: [Slider Example React App](https://slider-ochr
 ## Next base routing example (next-basic-ex folder)
 
 Example how to use routing and folder structure in NextJS to organize the project structure (dynamic routes and nested routes plus programmatic navigation). No UI. Just a skeleton.
+
+---
+
+## Simple Next Events App (next-events folder)
+
+Simple example of usage NextJS framework. No API, just UI with events list, allows to filter events. Includes dynamic paths and nested multiple dynamic pathes.
