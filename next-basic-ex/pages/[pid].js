@@ -3,7 +3,15 @@ import fs from 'fs/promises';
 import path from 'path';
 
 const ProductDetail = ({ product }) => {
-  return <div>Product Details: {product.description}</div>;
+  return <div>Product Details: {product && product.description}</div>;
+};
+
+const getData = async () => {
+  const jsonData = await fs.readFile(path.join(process.cwd(), 'data', 'dummy-backend.json'));
+  // @ts-ignore
+  const data = JSON.parse(jsonData);
+
+  return data;
 };
 
 export async function getStaticProps(context) {
@@ -11,11 +19,13 @@ export async function getStaticProps(context) {
     params: { pid },
   } = context;
 
-  const jsonData = await fs.readFile(path.join(process.cwd(), 'data', 'dummy-backend.json'));
-  // @ts-ignore
-  const data = JSON.parse(jsonData);
+  const data = await getData();
 
   const product = data.products.find((product) => product.id === pid);
+
+  if (!product) {
+    return { notFound: true };
+  }
 
   return {
     props: {
@@ -25,9 +35,14 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
+  const data = await getData();
+
+  const ids = data.products.map((product) => product.id);
+  const pathsWithParams = ids.map((id) => ({ params: { pid: id } }));
+
   return {
-    paths: [{ params: { pid: 'p1' } }, { params: { pid: 'p2' } }, { params: { pid: 'p3' } }],
-    fallback: false,
+    paths: pathsWithParams,
+    fallback: true, // true (with fallback in the component). 'blocking' (without fallback), false (no fallbacks)
   };
 }
 
