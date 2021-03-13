@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
+/** Utils */
 import { getFilteredEvents } from '../../helpers/api-util';
+/** Components */
 import EventList from '../../components/events/EventList';
 import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/Button';
 import ErrorAlert from '../../components/ui/error-alert';
 
-const FilteredEventsPage = ({ hasError, events }) => {
+const FilteredEventsPage = ({ hasError, events, errorMessage }) => {
   const {
     query: { slug },
   } = useRouter();
@@ -15,7 +17,7 @@ const FilteredEventsPage = ({ hasError, events }) => {
       {hasError ? (
         <>
           <ErrorAlert>
-            <p className="center">No events here</p>
+            <p className="center">{errorMessage}</p>
           </ErrorAlert>
 
           <div className="center">
@@ -41,7 +43,7 @@ export async function getServerSideProps(context) {
 
   if (isNaN(+year) || isNaN(+month) || +month < 1 || +month > 12) {
     return {
-      props: { hasError: true },
+      props: { hasError: true, errorMessage: 'Invalid filters' },
     };
   }
 
@@ -49,7 +51,7 @@ export async function getServerSideProps(context) {
 
   if (!events || events.length === 0) {
     return {
-      props: { hasError: true },
+      props: { hasError: true, errorMessage: 'No events found' },
     };
   }
 

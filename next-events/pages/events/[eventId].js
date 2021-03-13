@@ -1,4 +1,7 @@
+/** Dependencies */
 import { Fragment } from 'react';
+import Head from 'next/head';
+/** Utils */
 import { getEventById, getFeaturedEvents } from '../../helpers/api-util';
 /** Components */
 import EventSummary from '../../components/event-detail/event-summary';
@@ -17,6 +20,9 @@ const EventDetailPage = ({ event }) => {
 
   return (
     <Fragment>
+      <Head>
+        <title>{event.title}</title>
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}
