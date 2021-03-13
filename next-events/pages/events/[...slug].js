@@ -1,21 +1,18 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getFilteredEvents } from '../../dummy-data';
+import { getFilteredEvents } from '../../helpers/api-util';
 import EventList from '../../components/events/EventList';
 import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/Button';
 import ErrorAlert from '../../components/ui/error-alert';
 
-const FilteredEventsPage = () => {
+const FilteredEventsPage = ({ hasError, events }) => {
   const {
     query: { slug },
   } = useRouter();
 
-  const events = slug && getFilteredEvents({ year: +slug[0], month: +slug[1] });
-
   return (
     <div>
-      {!events || events.length === 0 ? (
+      {hasError ? (
         <>
           <ErrorAlert>
             <p className="center">No events here</p>
@@ -34,5 +31,33 @@ const FilteredEventsPage = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  const {
+    params: { slug },
+  } = context;
+
+  const [year, month] = slug;
+
+  if (isNaN(+year) || isNaN(+month) || +month < 1 || +month > 12) {
+    return {
+      props: { hasError: true },
+    };
+  }
+
+  const events = await getFilteredEvents({ year: +year, month: +month });
+
+  if (!events || events.length === 0) {
+    return {
+      props: { hasError: true },
+    };
+  }
+
+  return {
+    props: {
+      events,
+    },
+  };
+}
 
 export default FilteredEventsPage;
