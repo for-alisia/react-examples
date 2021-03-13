@@ -1,4 +1,6 @@
+/** Dependencies */
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 /** Utils */
 import { getFilteredEvents } from '../../helpers/api-util';
 /** Components */
@@ -14,6 +16,11 @@ const FilteredEventsPage = ({ hasError, events, errorMessage }) => {
 
   return (
     <div>
+      <Head>
+        <title>
+          {slug && slug[1]}/{slug && slug[0]}: {events ? events.length : 'No'} event(s) found
+        </title>
+      </Head>
       {hasError ? (
         <>
           <ErrorAlert>
