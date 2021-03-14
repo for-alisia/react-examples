@@ -2,7 +2,14 @@
 import fs from 'fs';
 import path from 'path';
 
+export function feedbackData() {
+  const filepath = path.join(process.cwd(), 'data', 'feedback.json');
+  return { filepath, data: JSON.parse(fs.readFileSync(filepath)) };
+}
+
 function handler(req, res) {
+  const { filepath, data } = feedbackData();
+
   if (req.method === 'POST') {
     const { email, text } = req.body;
 
@@ -12,15 +19,13 @@ function handler(req, res) {
       text,
     };
 
-    const filePath = path.join(process.cwd(), 'data', 'feedback.json');
-    const filedata = fs.readFileSync(filePath);
-    const data = JSON.parse(filedata);
     data.push(newFeedback);
-    fs.writeFileSync(filePath, JSON.stringify(data));
+    console.log(filepath);
+    fs.writeFileSync(filepath, JSON.stringify(data));
 
-    res.status(200).json({ message: 'Success', feedback: newFeedback });
+    res.status(201).json({ message: 'Success', feedback: newFeedback });
   } else {
-    res.status(200).json({ message: 'OK' });
+    res.status(200).json({ feedback: data });
   }
 }
 

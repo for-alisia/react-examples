@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 /** Node imports to pre-render */
 import fs from 'fs/promises';
@@ -8,6 +8,8 @@ import path from 'path';
 const HomePage = ({ products }) => {
   const emailInput = useRef();
   const feedbackInput = useRef();
+
+  const [feedback, setFeedback] = useState();
 
   const submitFormHandler = (e) => {
     e.preventDefault();
@@ -26,7 +28,18 @@ const HomePage = ({ products }) => {
       },
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        loadFeedback();
+      });
+  };
+
+  const loadFeedback = () => {
+    fetch('/api/feedback')
+      .then((response) => response.json())
+      .then(({ feedback }) => {
+        setFeedback(feedback);
+      });
   };
 
   return (
@@ -58,6 +71,17 @@ const HomePage = ({ products }) => {
         </div>
         <button type="submit">Submit</button>
       </form>
+      <hr />
+      <button onClick={loadFeedback}>Load feedback</button>
+      {feedback && (
+        <ul>
+          {feedback.map((item) => (
+            <li key={item.id}>
+              {item.text} from {item.email}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
