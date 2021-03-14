@@ -1,9 +1,34 @@
+// @ts-nocheck
+import { useRef } from 'react';
 import Link from 'next/link';
 /** Node imports to pre-render */
 import fs from 'fs/promises';
 import path from 'path';
 
 const HomePage = ({ products }) => {
+  const emailInput = useRef();
+  const feedbackInput = useRef();
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+
+    const enteredEmail = emailInput.current.value;
+    const enteredFeedback = feedbackInput.current.value;
+
+    fetch('/api/feedback', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: enteredEmail,
+        text: enteredFeedback,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <div>
       <h1>Home</h1>
@@ -22,6 +47,17 @@ const HomePage = ({ products }) => {
           </li>
         ))}
       </ul>
+      <form onSubmit={submitFormHandler}>
+        <div>
+          <label htmlFor="email">Email Address</label>
+          <input type="email" id="email" ref={emailInput} />
+        </div>
+        <div>
+          <label htmlFor="feedback">Feedback</label>
+          <textarea rows={5} id="feedback" ref={feedbackInput} />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 };
