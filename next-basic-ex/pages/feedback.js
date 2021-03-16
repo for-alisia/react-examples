@@ -10,6 +10,7 @@ const FeedbackPage = ({ feedback }) => {
       .then((res) => res.json())
       .then(({ feedback }) => setFeedbackData(feedback));
   };
+
   return (
     <div>
       <h1>Feedback List</h1>
