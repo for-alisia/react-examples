@@ -1,11 +1,16 @@
 // @ts-nocheck
+/** Dependencies */
 import { useRef, useContext } from 'react';
-import classes from './newsletter-registration.module.css';
+
+/** Context */
 import NotificationContext from '../../store/notification-context';
+
+/** Styles */
+import classes from './newsletter-registration.module.css';
 
 function NewsletterRegistration() {
   const emailRef = useRef();
-  const { showNotification, hideNotification } = useContext(NotificationContext);
+  const { showNotification } = useContext(NotificationContext);
 
   function registrationHandler(event) {
     event.preventDefault();
@@ -25,26 +30,28 @@ function NewsletterRegistration() {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return res.json().then((data) => {
+          throw new Error(data.message || 'Something went wrong');
+        });
+      })
       .then((data) => {
         showNotification({
           title: 'Newsletter Registration',
           message: `Email ${email} were successfully added`,
           status: 'success',
         });
-        setTimeout(() => {
-          hideNotification();
-        }, 2000);
       })
       .catch((err) => {
         showNotification({
           title: 'Newletter Registration',
-          message: err.message,
+          message: err.message || 'Something went wrong',
           status: 'error',
         });
-        setTimeout(() => {
-          hideNotification();
-        }, 2000);
       });
   }
 

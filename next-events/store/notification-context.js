@@ -24,6 +24,20 @@ export function NotificationContextProvider(props) {
     hideNotification: hideNotidicationHandler,
   };
 
+  useEffect(() => {
+    let timer;
+
+    if (activeNotification && activeNotification.status !== 'pending') {
+      timer = setTimeout(() => {
+        setActiveNotification(null);
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [activeNotification]);
+
   return (
     <NotificationContext.Provider value={context}>{props.children}</NotificationContext.Provider>
   );
