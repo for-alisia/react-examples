@@ -1,13 +1,18 @@
-import { MongoClient } from 'mongodb';
+import { connectDB, insertDocument, getDocuments } from '../../../helpers/db-utils';
 
 async function handler(req, res) {
   const {
     query: { eventId },
   } = req;
 
-  const client = await MongoClient.connect(
-    'mongodb+srv://for-alisia:25082209@clustertest.zi0j3.mongodb.net/nextEvents?retryWrites=true&w=majority'
-  );
+  let client;
+
+  try {
+    client = await connectDB();
+  } catch (err) {
+    res.status(500).json({ message: 'Connection failed' });
+    return;
+  }
 
   if (req.method === 'POST') {
     const {
@@ -15,6 +20,7 @@ async function handler(req, res) {
     } = req;
     if (!email || name.trim() === '' || text.trim() === '' || !email.includes('@')) {
       res.status(422).json({ message: 'Invalid input' });
+      client.close();
       return;
     }
 
@@ -25,22 +31,26 @@ async function handler(req, res) {
       eventId,
     };
 
-    const db = client.db();
+    let result;
 
-    const result = await db.collection('comments').insertOne(comment);
+    try {
+      result = await insertDocument(client, 'comments', comment);
+      comment._id = result.insertedId;
 
-    comment.id = result.insertedId;
-
-    res.status(201).json({ message: 'Added comment', comment });
+      res.status(201).json({ message: 'Added comment', comment });
+    } catch (err) {
+      res.status(500).json({ message: 'Inserting failed' });
+    }
   }
 
   if (req.method === 'GET') {
-    const dummyList = [
-      { id: 'c1', name: 'Max', text: 'First comment' },
-      { id: 'c2', name: 'Lena', text: 'Second comment' },
-    ];
+    try {
+      const comments = await getDocuments(client, 'comments', { _id: -1 }, { eventId });
 
-    res.status(200).json({ comments: dummyList });
+      res.status(200).json({ comments });
+    } catch (err) {
+      res.status(500).json({ message: 'Failed getting comments' });
+    }
   }
 
   client.close();
