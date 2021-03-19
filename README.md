@@ -82,6 +82,8 @@ Example how to use routing and folder structure in NextJS to organize the projec
 
 ---
 
-## Simple Next Events App (next-events folder)
+## Next Events App (next-events folder)
 
-Simple example of usage NextJS framework. No API, just UI with events list, allows to filter events. Includes dynamic paths and nested multiple dynamic pathes.
+Example of usage NextJS framework. Includes: dynamic paths, getStaticProps(), SEO, api-routing, Context API to show notifications, connected to MongoDB and uses file system (just as an example)
+
+Live version, deployed via Vercel: [Events NextJS App](https://next-events-pxlej0zyn-for-alisia.vercel.app/)
