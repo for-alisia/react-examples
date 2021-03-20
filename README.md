@@ -87,3 +87,9 @@ Example how to use routing and folder structure in NextJS to organize the projec
 Example of usage NextJS framework. Includes: dynamic paths, getStaticProps(), SEO, api-routing, Context API to show notifications, connected to MongoDB and uses file system (just as an example)
 
 Live version, deployed via Vercel: [Events NextJS App](https://next-events-pxlej0zyn-for-alisia.vercel.app/)
+
+---
+
+## Next Auth App (next-auth folder)
+
+Example of using authentification with NextJS applications. App uses next-auth package to handle all auth logic. Includes: login, signup via credentials, protected routes, changing of the credentials.
