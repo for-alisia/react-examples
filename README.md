@@ -93,3 +93,9 @@ Live version, deployed via Vercel: [Events NextJS App](https://next-events-pxlej
 ## Next Auth App (next-auth folder)
 
 Example of using authentification with NextJS applications. App uses next-auth package to handle all auth logic. Includes: login, signup via credentials, protected routes, changing of the credentials.
+
+---
+
+## MobX Axample (mobx-ex folder)
+
+Basic example of using MobX as a statemanager in React Project. Uses Typescript as a template.
