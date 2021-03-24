@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import './todo.ts';
+import './mobx';
 
 function App() {
   return (
