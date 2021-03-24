@@ -8,7 +8,20 @@ import RootStore from './stores/root-store';
 
 const rootStore = new RootStore();
 
-console.log(rootStore);
+// Users
+rootStore.dataStore.userStore.addUser('Max');
+rootStore.dataStore.userStore.addUser('Alex');
+rootStore.dataStore.userStore.addUser('Alice');
+rootStore.dataStore.userStore.addUser('Lena');
+
+const user = rootStore.dataStore.userStore.getUser('Alex');
+
+if (user) {
+  rootStore.dataStore.todoStore.addTodo('First todo', user.id);
+  rootStore.dataStore.todoStore.addTodo('Second todo', user.id);
+
+  rootStore.dataStore.userStore.removeUser(user.name);
+}
 
 ReactDOM.render(
   <React.StrictMode>
