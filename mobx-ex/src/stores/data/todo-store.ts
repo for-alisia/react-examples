@@ -56,7 +56,7 @@ export default class TodoStore {
   }
 
   @action
-  changeItemStatus(id: string, status: TodoStatus) {
+  changeItemStatus(id: string) {
     const todo = this.items.find((item) => item.id === id);
 
     if (!todo) {
@@ -64,7 +64,7 @@ export default class TodoStore {
       return;
     }
 
-    todo.changeStatus(status);
+    todo.changeStatus();
   }
 
   @action

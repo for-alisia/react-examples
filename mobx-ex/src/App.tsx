@@ -1,21 +1,49 @@
 import React from 'react';
 import './App.css';
 import { useStore } from './stores/helpers/use-store';
+import { Views } from './stores/ui/global-view-store';
+import { observer } from 'mobx-react-lite';
+import TodoList from './components/TodoList';
 
 function App() {
   const {
-    dataStore: { todoStore },
+    uiStore: { globalView },
   } = useStore();
+
+  const getCurrentView = () => {
+    if (globalView.currentView === Views.Todos) {
+      return <TodoList />;
+    }
+
+    if (globalView.currentView === Views.Users) {
+      return <div>Users</div>;
+    }
+
+    return null;
+  };
+
   return (
-    <div>
-      <h2>Todo List</h2>
-      <ul>
-        {todoStore.items.map((item) => (
-          <li key={item.id}>{item.content}</li>
-        ))}
-      </ul>
+    <div className="App">
+      <nav className="navbar navbar-dark bg-dark">
+        <div style={{ flexDirection: 'row' }} className="navbar-nav">
+          <span className={`nav-item ${globalView.currentView === Views.Todos ? 'active' : null}`}>
+            <a href="#" className="nav-link" onClick={() => globalView.updateView(Views.Todos)}>
+              {`${Views.Todos}`} View
+            </a>
+          </span>
+          <span
+            style={{ marginLeft: '15px' }}
+            className={`nav-item ${globalView.currentView === Views.Users ? 'active' : null}`}
+          >
+            <a href="#" className="nav-link" onClick={() => globalView.updateView(Views.Users)}>
+              {`${Views.Users}`} View
+            </a>
+          </span>
+        </div>
+      </nav>
+      {getCurrentView()}
     </div>
   );
 }
 
-export default App;
+export default observer(App);

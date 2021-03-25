@@ -40,12 +40,12 @@ export default class Todo {
   }
 
   @action
-  changeStatus(status: TodoStatus) {
-    if (this.status === status) {
-      console.log(`Item is already ${status}`);
-      return;
+  changeStatus() {
+    if (this.status === 'active') {
+      this.status = 'completed';
+    } else {
+      this.status = 'active';
     }
-    this.status = status;
   }
 
   @action
