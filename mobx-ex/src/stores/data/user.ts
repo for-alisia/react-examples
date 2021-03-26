@@ -22,4 +22,14 @@ export default class User {
   get todos() {
     return this.rootStore.dataStore.todoStore.getUserTodos(this.id);
   }
+
+  @computed
+  get activeTodos() {
+    return this.todos.filter((item) => item.status === 'active');
+  }
+
+  @computed
+  get completedTodos() {
+    return this.todos.filter((item) => item.status === 'completed');
+  }
 }

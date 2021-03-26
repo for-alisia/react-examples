@@ -2,8 +2,13 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../stores/helpers/use-store';
 import TodoComponent from './TodoComponent';
 import { useState } from 'react';
+import User from '../stores/data/user';
 
-const TodoList = () => {
+interface TodoListProps {
+  user?: User;
+}
+
+const TodoList: React.FC<TodoListProps> = ({ user }) => {
   const {
     dataStore: { todoStore },
   } = useStore();
@@ -12,10 +17,13 @@ const TodoList = () => {
 
   const addTodo = () => {
     if (input.length > 1) {
-      todoStore.addTodo(input, '111');
+      todoStore.addTodo(input, user ? user.id : '111');
       setInput('');
     }
   };
+
+  const activeTodos = user ? user.activeTodos : todoStore.activeTodos;
+  const completedTodos = user ? user.completedTodos : todoStore.completedTodos;
 
   return (
     <div>
@@ -33,17 +41,17 @@ const TodoList = () => {
         </div>
       </div>
       <div className="card">
-        <div className="card-header">Active Todos ({todoStore.activeTodos.length})</div>
+        <div className="card-header">Active Todos ({activeTodos.length})</div>
         <ul className="list-group">
-          {todoStore.activeTodos.map((todo) => (
+          {activeTodos.map((todo) => (
             <TodoComponent key={todo.id} todo={todo} />
           ))}
         </ul>
       </div>
       <div className="card">
-        <div className="card-header">Completed Todos ({todoStore.completedTodos.length})</div>
+        <div className="card-header">Completed Todos ({completedTodos.length})</div>
         <ul className="list-group">
-          {todoStore.completedTodos.map((todo) => (
+          {completedTodos.map((todo) => (
             <TodoComponent key={todo.id} todo={todo} />
           ))}
         </ul>

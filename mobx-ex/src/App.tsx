@@ -4,6 +4,7 @@ import { useStore } from './stores/helpers/use-store';
 import { Views } from './stores/ui/global-view-store';
 import { observer } from 'mobx-react-lite';
 import TodoList from './components/TodoList';
+import UserList from './components/UserList';
 
 function App() {
   const {
@@ -16,7 +17,7 @@ function App() {
     }
 
     if (globalView.currentView === Views.Users) {
-      return <div>Users</div>;
+      return <UserList />;
     }
 
     return null;
