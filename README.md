@@ -98,4 +98,4 @@ Example of using authentification with NextJS applications. App uses next-auth p
 
 ## MobX Axample (mobx-ex folder)
 
-Basic example of using MobX as a statemanager in React Project. Uses Typescript as a template.
+Basic example of using MobX as a statemanager in React Project. React + Typescript + MobX. Application has 2 lists: users and todos. User can add, edit and remove todo. Class-based approach to create stores and to manage data inside the app.
