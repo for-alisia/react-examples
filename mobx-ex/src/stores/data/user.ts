@@ -1,4 +1,4 @@
-import { computed, observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import randomId from '../../utils/random-id';
 import RootStore from '../root-store';
 
@@ -7,7 +7,6 @@ export default class User {
 
   private readonly rootStore: RootStore;
 
-  @observable
   name: string;
 
   constructor(name: string, rootStore: RootStore) {
@@ -15,20 +14,21 @@ export default class User {
     this.id = randomId();
     this.rootStore = rootStore;
 
+    makeAutoObservable(this, {
+      id: false,
+    });
+
     this.rootStore.dataStore.todoStore.addTodo('Finish the project', this.id);
   }
 
-  @computed
   get todos() {
     return this.rootStore.dataStore.todoStore.getUserTodos(this.id);
   }
 
-  @computed
   get activeTodos() {
     return this.todos.filter((item) => item.status === 'active');
   }
 
-  @computed
   get completedTodos() {
     return this.todos.filter((item) => item.status === 'completed');
   }

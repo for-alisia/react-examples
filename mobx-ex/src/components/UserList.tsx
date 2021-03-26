@@ -38,7 +38,9 @@ const UserList = () => {
         <ul className="list-group">
           {userStore.usersList.map((user) => (
             <li
-              className={`list-group-item ${currentUser.id === user.id ? 'active' : 'hover'}`}
+              className={`list-group-item ${
+                currentUser && currentUser.id === user.id ? 'active' : 'hover'
+              }`}
               key={user.id}
               onClick={() => setCurrentUser(userStore.getUser(user.name) as User)}
             >
