@@ -14,19 +14,6 @@ export default class TodoStore {
       findItem: false,
       getUserTodos: false,
     });
-
-    // reaction(
-    //   () => this.items.length,
-    //   () =>
-    //     console.log(
-    //       `Total items: ${this.items.length}, Completed: ${this.completedTodos.length}, active: ${this.activeTodos.length}`
-    //     )
-    // );
-
-    // when(
-    //   () => this.items.length > 0 && this.items.every((item) => item.status === 'completed'),
-    //   () => console.log('All items were completed!')
-    // );
   }
 
   findItem(id: string) {
