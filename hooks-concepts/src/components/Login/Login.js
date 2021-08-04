@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect, useReducer, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -8,39 +8,30 @@ import Input from '../UI/Input/Input';
 import AuthContext from '../../store/auth-context';
 
 // Reducer logic
-import {
-  formReducer,
-  checkPassword,
-  checkEmail,
-  inputBlurAction,
-  inputUpdateAction,
-} from './login.reducer';
+import { useInput } from './login.reducer';
 
 const Login = () => {
   const [formIsValid, setFormIsValid] = useState(false);
+  const {
+    value: emailValue,
+    isValid: emailIsValid,
+    isTouched: emailIsTouched,
+    inputBlur: emailInputBlur,
+    inputChanged: emailInputChange,
+  } = useInput({ type: 'email', name: 'email' });
 
-  const [emailState, dispatchEmail] = useReducer(formReducer, {
-    value: '',
-    isValid: false,
-    isTouched: false,
-    validation: checkEmail,
-  });
-
-  const [passwordState, dispatchPassword] = useReducer(formReducer, {
-    value: '',
-    isValid: false,
-    isTouched: false,
-    validation: checkPassword,
-  });
+  const {
+    value: passwordValue,
+    isValid: passwordIsValid,
+    isTouched: passwordIsTouched,
+    inputBlur: passwordInputBlur,
+    inputChanged: passwordInputChange,
+  } = useInput({ type: 'password', name: 'password' });
 
   const authCtx = useContext(AuthContext);
 
   const emailRef = useRef();
   const passwordRef = useRef();
-
-  // To avoid unnessesary calling of useEffect restore parts of state objects (we need to call useEffect only if validity changes)
-  const { isValid: emailIsValid } = emailState;
-  const { isValid: passwordIsValid } = passwordState;
 
   useEffect(() => {
     // Debouncing technic - we don't want to check while user is typing, so we set a delay and clean it with each next key press
@@ -53,7 +44,7 @@ const Login = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (formIsValid) {
-      authCtx.onLogin(emailState.value, passwordState.value);
+      authCtx.onLogin(emailValue, passwordValue);
     } else if (!emailIsValid) {
       emailRef.current.activate();
     } else {
@@ -69,22 +60,22 @@ const Login = () => {
           type="email"
           id="email"
           label={'E-Mail'}
-          value={emailState.value}
-          isValid={emailState.isValid}
-          isTouched={emailState.isTouched}
-          changeHandler={(e) => dispatchEmail(inputUpdateAction(e.target.value))}
-          validateHandler={() => dispatchEmail(inputBlurAction())}
+          value={emailValue}
+          isValid={emailIsValid}
+          isTouched={emailIsTouched}
+          changeHandler={(e) => emailInputChange(e.target.value)}
+          validateHandler={emailInputBlur}
         />
         <Input
           ref={passwordRef}
           type="password"
           id="password"
           label="Password"
-          value={passwordState.value}
-          isValid={passwordState.isValid}
-          isTouched={passwordState.isTouched}
-          changeHandler={(e) => dispatchPassword(inputUpdateAction(e.target.value))}
-          validateHandler={() => dispatchPassword(inputBlurAction())}
+          value={passwordValue}
+          isValid={passwordIsValid}
+          isTouched={passwordIsTouched}
+          changeHandler={(e) => passwordInputChange(e.target.value)}
+          validateHandler={passwordInputBlur}
         />
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn}>
