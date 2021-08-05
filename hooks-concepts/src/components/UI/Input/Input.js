@@ -22,7 +22,10 @@ const Input = React.forwardRef(
     }));
 
     return (
-      <div className={`${classes.control} ${!isValid && isTouched ? classes.invalid : ''}`}>
+      <div
+        className={`${classes.control} ${!isValid && isTouched ? classes.invalid : ''}`}
+        data-testid="ui-input"
+      >
         <label htmlFor={id}>{label}</label>
         <input
           type={type}

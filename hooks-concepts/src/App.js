@@ -10,7 +10,9 @@ function App() {
   return (
     <>
       <MainHeader />
-      <main>{ctx.isLoggedIn ? <Home onLogout={ctx.onLogout} /> : <Login />}</main>
+      <main>
+        {ctx.isLoggedIn ? <Home onLogout={ctx.onLogout} /> : <Login onLogin={ctx.onLogin} />}
+      </main>
     </>
   );
 }

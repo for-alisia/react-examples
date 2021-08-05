@@ -4,9 +4,12 @@ import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
 
 import useHttpClient from './hooks/use-http';
+import ErrorBoundary from './components/common/ErrorBoundary';
+import ErrorComponent from './components/common/Error';
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [showError, setShowError] = useState(false);
 
   const { isLoading, error, sendRequest: fetchTasks } = useHttpClient();
 
@@ -31,8 +34,18 @@ function App() {
 
   return (
     <React.Fragment>
-      <NewTask onAddTask={taskAddHandler} />
-      <Tasks items={tasks} loading={isLoading} error={error} onFetch={fetchTasks} />
+      <ErrorBoundary>
+        <NewTask onAddTask={taskAddHandler} />
+        <Tasks items={tasks} loading={isLoading} error={error} onFetch={fetchTasks} />
+        <button
+          onClick={() => {
+            setShowError(true);
+          }}
+        >
+          Set Error
+        </button>
+        {showError && <ErrorComponent />}
+      </ErrorBoundary>
     </React.Fragment>
   );
 }

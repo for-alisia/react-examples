@@ -1,16 +1,15 @@
 // @ts-nocheck
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
-import AuthContext from '../../store/auth-context';
 
 // Reducer logic
 import { useInput } from './login.reducer';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [formIsValid, setFormIsValid] = useState(false);
   const {
     value: emailValue,
@@ -28,8 +27,6 @@ const Login = () => {
     inputChanged: passwordInputChange,
   } = useInput({ type: 'password', name: 'password' });
 
-  const authCtx = useContext(AuthContext);
-
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -44,7 +41,7 @@ const Login = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (formIsValid) {
-      authCtx.onLogin(emailValue, passwordValue);
+      onLogin(emailValue, passwordValue);
     } else if (!emailIsValid) {
       emailRef.current.activate();
     } else {
@@ -54,7 +51,7 @@ const Login = () => {
 
   return (
     <Card className={classes.login}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} aria-label="form">
         <Input
           ref={emailRef}
           type="email"
