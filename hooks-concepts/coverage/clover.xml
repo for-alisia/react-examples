@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1628162858016" clover="3.2.0">
+  <project timestamp="1628162858016" name="All files">
+    <metrics statements="17" coveredstatements="17" conditionals="4" coveredconditionals="4" methods="8" coveredmethods="6" elements="29" coveredelements="27" complexity="0" loc="17" ncloc="17" packages="3" files="3" classes="3"/>
+    <package name="src">
+      <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="App.js" path="/Users/alisia/Projects/ReactProjects/react-examples/hooks-concepts/src/App.js">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="9" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.MainHeader">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="MainHeader.js" path="/Users/alisia/Projects/ReactProjects/react-examples/hooks-concepts/src/components/MainHeader/MainHeader.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.store">
+      <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="6" coveredmethods="4"/>
+      <file name="auth-context.js" path="/Users/alisia/Projects/ReactProjects/react-examples/hooks-concepts/src/store/auth-context.js">
+        <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="6" coveredmethods="4"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="13" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
