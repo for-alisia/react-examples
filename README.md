@@ -99,3 +99,18 @@ Example of using authentification with NextJS applications. App uses next-auth p
 ## MobX Axample (mobx-ex folder)
 
 Basic example of using MobX as a statemanager in React Project. React + Typescript + MobX. Application has 2 lists: users and todos. User can add, edit and remove todo. Class-based approach to create stores and to manage data inside the app.
+
+## Gallery
+
+<p align="center">
+<img src="./screens/cart.screen.png" alt="cart" width="40%"/>
+<img src="./screens/color-generator.screen.png" alt="colors" width="40%"/>
+<img src="./screens/next-auth.png" alt="next1" width="40%"/>
+<img src="./screens/next-events.png" alt="next2" width="40%"/>
+<img src="./screens/pics.screen.png" alt="pictures" width="40%"/>
+<img src="./screens/reviews.screen.png" alt="reviews" width="40%"/>
+<img src="./screens/seasons.screen.png" alt="seasons" width="40%"/>
+<img src="./screens/slider.screen.png" alt="slide" width="40%"/>
+<img src="./screens/songs.screen.png" alt="songs" width="40%"/>
+<img src="./screens/youtube.screen.png" alt="youtube" width="40%"/>
+</p>
